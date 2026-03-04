@@ -1,5 +1,4 @@
 *
 !.gitignore
-!.git
 !*.asm
 !README.md 

@@ -1,5 +1,21 @@
 section .text
-global _start
+
+global exit
+global strlen 
+global print 
+global print_int 
+global print_new_line
+global print_uint 
+global print_char
+global read_char
+global read_word
+global parse_int
+global parse_uint
+global strcpy
+global strcmp
+
+
+
 
 ; Recv the return value in rdi
 exit:
@@ -45,7 +61,6 @@ print_new_line:
   ret
 
 ; Recv the value in rdi 
-
 print_uint:
   push rbp 
   mov rbp, rsp 
@@ -155,8 +170,10 @@ parse_uint:
   xor r14, r14
 .loop:
   xor rax, rax
-  cmp byte [rdi + r14], 0 
-  je .end_loop 
+  cmp byte [rdi + r14], 48 
+  jl .end_loop
+  cmp byte [rdi + r14], 57
+  jg .end_loop
   mov al, [rdi + r14]
   sub al, 48 
   push rax 
@@ -234,12 +251,6 @@ strcpy:
 .error:
   mov rax, 0 
   ret 
-
-_start: 
-  mov rdi, 100
-  call print_uint
-  mov rdi, 0 
-  call exit 
 
   
 
